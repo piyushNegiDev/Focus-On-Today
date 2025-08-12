@@ -44,6 +44,12 @@ main {
   height: 20px;
   border-radius: 20px;
 }
+.green-bar {
+  height: 20px;
+  background-color: green;
+  width: 0%;
+  border-radius: 20px;
+}
 .selectGoalsMsg {
   color: red;
 }
@@ -63,6 +69,13 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.circle-border {
+  border: none;
+}
+.line {
+  text-decoration: line-through;
+  color: green;
 }
 .input-container {
   width: 100%;

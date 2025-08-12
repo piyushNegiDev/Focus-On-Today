@@ -1,3 +1,4 @@
+let bar = document.querySelector(".green-bar");
 function goalsHtml() {
   let html = "";
   for (let index = 0; index < 3; index++) {
@@ -5,7 +6,7 @@ function goalsHtml() {
         <div class="input-container">
         <div class="circle"></div>
         <div class="input" id=${index}>
-        <input type="text" placeholder="Add new goal" />
+        <input type="text" placeholder="Add new goal  |  Press Enter after filling task" />
         </div>
         </div>`;
   }
@@ -25,11 +26,29 @@ function inputsListener() {
 }
 
 function tick() {
+  let barWidth = 0;
   let circles = document.querySelectorAll(".circle");
   circles.forEach((circle) => {
     circle.addEventListener("click", () => {
-      circle.innerHTML = `<img src="green tick.png" width="19" height="19" alt="" />`;
-      circle.style.border = "none";
+      if (circle.innerHTML === "") {
+        circle.innerHTML = `<img src="green tick.png" width="19" height="19" alt="" />`;
+
+        circle.classList.add("circle-border");
+        circle.nextElementSibling.classList.add("line");
+
+        if (barWidth < 100) {
+          barWidth = barWidth + 33.33;
+          bar.style.width = `${barWidth}%`;
+        }
+      } else {
+        circle.innerHTML = "";
+
+        circle.classList.remove("circle-border");
+        circle.nextElementSibling.classList.remove("line");
+
+        barWidth = barWidth - 33.33;
+        bar.style.width = `${barWidth}%`;
+      }
     });
   });
 }
