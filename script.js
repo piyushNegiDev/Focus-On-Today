@@ -1,53 +1,61 @@
-let bar = document.querySelector(".green-bar");
 function goalsHtml() {
   let html = "";
   for (let index = 0; index < 3; index++) {
     html += `
-        <div class="input-container">
-        <div class="circle"></div>
-        <div class="input" id=${index}>
-        <input type="text" placeholder="Add new goal  |  Press Enter after filling task" />
-        </div>
-        </div>`;
+    <div class="input-container">
+    <div class="circle"></div>
+    <div class="input" id=${index}>
+    <input type="text" placeholder="Add new goal  |  Press Enter after filling task" />
+    </div>
+    </div>`;
   }
   document.querySelector(".goals").innerHTML = html;
 }
 
 function inputsListener() {
+  let selectGoalsMsg = document.querySelector(".selectGoalsMsg");
   let inputs = document.getElementsByTagName("input");
   inputs = Array.from(inputs);
-  inputs.forEach((input) => {
+  inputs.forEach((input, index) => {
     input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        input.parentElement.innerHTML = input.value;
+      if (input.value.trim() !== "") {
+        if (event.key === "Enter") {
+          input.parentElement.innerHTML = input.value;
+
+          selectGoalsMsg.innerHTML = `${index + 1}/3 task filled`;
+          selectGoalsMsg.style.color = "green";
+        }
       }
     });
   });
 }
 
 function tick() {
+  let bar = document.querySelector(".green-bar");
   let barWidth = 0;
   let circles = document.querySelectorAll(".circle");
-  circles.forEach((circle) => {
+  circles.forEach((circle, index) => {
     circle.addEventListener("click", () => {
-      if (circle.innerHTML === "") {
-        circle.innerHTML = `<img src="green tick.png" width="19" height="19" alt="" />`;
+      if (document.getElementById(index).innerText.length > 0) {
+        if (circle.innerHTML === "") {
+          circle.innerHTML = `<img src="green tick.png" width="19" height="19" alt="" />`;
 
-        circle.classList.add("circle-border");
-        circle.nextElementSibling.classList.add("line");
+          circle.classList.add("circle-border");
+          circle.nextElementSibling.classList.add("line");
 
-        if (barWidth < 100) {
-          barWidth = barWidth + 33.33;
+          if (barWidth < 100) {
+            barWidth = barWidth + 33.33;
+            bar.style.width = `${barWidth}%`;
+          }
+        } else {
+          circle.innerHTML = "";
+
+          circle.classList.remove("circle-border");
+          circle.nextElementSibling.classList.remove("line");
+
+          barWidth = barWidth - 33.33;
           bar.style.width = `${barWidth}%`;
         }
-      } else {
-        circle.innerHTML = "";
-
-        circle.classList.remove("circle-border");
-        circle.nextElementSibling.classList.remove("line");
-
-        barWidth = barWidth - 33.33;
-        bar.style.width = `${barWidth}%`;
       }
     });
   });
