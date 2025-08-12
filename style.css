@@ -53,12 +53,23 @@ main {
   gap: 20px;
   align-items: center;
 }
-.input {
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 10px;
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid lightgray;
 }
-.input input {
+.input-container {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+}
+.input-container input {
   width: 100%;
   padding: 20px 10px;
   border-radius: 10px;
@@ -67,4 +78,7 @@ main {
 }
 .lastMsg {
   text-align: center;
+}
+.input {
+  width: 100%;
 }
