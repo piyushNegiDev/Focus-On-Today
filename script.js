@@ -1,5 +1,3 @@
-let inputDiv = document.querySelector(".input");
-
 let html = "";
 for (let index = 0; index < 3; index++) {
   html += `
@@ -14,11 +12,18 @@ document.querySelector(".goals").innerHTML = html;
 
 let inputs = document.getElementsByTagName("input");
 inputs = Array.from(inputs);
-
 inputs.forEach((input) => {
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       input.parentElement.innerHTML = input.value;
     }
+  });
+});
+
+let circles = document.querySelectorAll(".circle");
+circles.forEach((circle) => {
+  circle.addEventListener("click", () => {
+    circle.innerHTML = `<img src="green tick.png" width="19" height="19" alt="" />`;
+    circle.style.border = "none";
   });
 });
