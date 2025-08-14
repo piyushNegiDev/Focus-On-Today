@@ -1,6 +1,9 @@
+let inputs = document.getElementsByTagName("input");
+let goals = 4;
+
 function goalsHtml() {
   let html = "";
-  for (let index = 0; index < 3; index++) {
+  for (let index = 0; index < goals; index++) {
     html += `
     <div class="input-container">
     <div class="circle"></div>
@@ -14,7 +17,6 @@ function goalsHtml() {
 
 function inputsListener() {
   let selectGoalsMsg = document.querySelector(".selectGoalsMsg");
-  let inputs = document.getElementsByTagName("input");
   inputs = Array.from(inputs);
   inputs.forEach((input, index) => {
     input.addEventListener("keydown", (event) => {
@@ -22,7 +24,7 @@ function inputsListener() {
         if (event.key === "Enter") {
           input.parentElement.innerHTML = input.value;
 
-          selectGoalsMsg.innerHTML = `${index + 1}/3 task filled`;
+          selectGoalsMsg.innerHTML = `${index + 1}/${goals} task filled`;
           selectGoalsMsg.style.color = "green";
         }
       }
@@ -31,6 +33,8 @@ function inputsListener() {
 }
 
 function tick() {
+  let completedGoals = 0;
+  let totalGoals = inputs.length;
   let bar = document.querySelector(".green-bar");
   let barWidth = 0;
   let circles = document.querySelectorAll(".circle");
@@ -43,17 +47,19 @@ function tick() {
           circle.classList.add("circle-border");
           circle.nextElementSibling.classList.add("line");
 
-          if (barWidth < 100) {
-            barWidth = barWidth + 33.33;
-            bar.style.width = `${barWidth}%`;
-          }
+          completedGoals++;
+
+          barWidth = (completedGoals / totalGoals) * 100;
+          bar.style.width = `${barWidth}%`;
         } else {
           circle.innerHTML = "";
 
           circle.classList.remove("circle-border");
           circle.nextElementSibling.classList.remove("line");
 
-          barWidth = barWidth - 33.33;
+          completedGoals--;
+
+          barWidth = (completedGoals / totalGoals) * 100;
           bar.style.width = `${barWidth}%`;
         }
       }
