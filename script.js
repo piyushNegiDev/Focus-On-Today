@@ -6,16 +6,16 @@ function goalsHtml() {
   for (let index = 0; index < goals; index++) {
     html += `
     <div class="goalsChild">
-          <div class="input-container">
+        <div class="input-container">
             <div class="circle"></div>
-            <div class="input" id="0">
-              <input
+            <div class="input" id="${index}">
+                <input
                 type="text"
                 placeholder="Add new goal  |  Press Enter after filling task"
-              />
+                />
             </div>
-          </div>
-          <button>SAVE</button>
+        </div>
+        <button>SAVE</button>
     </div>
     `;
   }

@@ -62,7 +62,6 @@ main {
   align-items: center;
 }
 .goalsChild {
-  /* border: 1px solid black; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -73,7 +72,7 @@ main {
   padding: 5px 15px;
   border: none;
   border-radius: 5px;
-  background-color: lightgreen;
+  background-color: green;
   color: white;
   font-size: 1.2em;
   font-weight: bold;
@@ -103,10 +102,10 @@ main {
 }
 .input-container {
   width: 100%;
+  min-width: 300px;
   border: 1px solid lightgray;
 
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 20px 10px;
   border-radius: 10px;
@@ -121,4 +120,5 @@ main {
 }
 .input {
   word-break: break-all;
+  max-width: 500%;
 }
