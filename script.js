@@ -5,12 +5,19 @@ function goalsHtml() {
   let html = "";
   for (let index = 0; index < goals; index++) {
     html += `
-    <div class="input-container">
-    <div class="circle"></div>
-    <div class="input" id=${index}>
-    <input type="text" placeholder="Add new goal  |  Press Enter after filling task" />
+    <div class="goalsChild">
+          <div class="input-container">
+            <div class="circle"></div>
+            <div class="input" id="0">
+              <input
+                type="text"
+                placeholder="Add new goal  |  Press Enter after filling task"
+              />
+            </div>
+          </div>
+          <button>SAVE</button>
     </div>
-    </div>`;
+    `;
   }
   document.querySelector(".goals").innerHTML = html;
 }
@@ -18,6 +25,7 @@ function goalsHtml() {
 function inputsListener() {
   let selectGoalsMsg = document.querySelector(".selectGoalsMsg");
   inputs = Array.from(inputs);
+
   inputs.forEach((input, index) => {
     input.addEventListener("keydown", (event) => {
       if (input.value.trim() !== "") {

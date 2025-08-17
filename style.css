@@ -32,8 +32,9 @@ main {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   row-gap: 20px;
-  padding: 20px 20px;
+  padding: 20px;
 }
 .completingMsg {
   color: gray;
@@ -60,9 +61,27 @@ main {
   gap: 20px;
   align-items: center;
 }
+.goalsChild {
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.goalsChild button {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: lightgreen;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
 .circle {
   width: 20px;
   height: 20px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid lightgray;
   margin-right: 5px;
@@ -85,16 +104,15 @@ main {
 .input-container {
   width: 100%;
   border: 1px solid lightgray;
-  border-radius: 10px;
 
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 20px 10px;
   border-radius: 10px;
 }
 .input-container input {
-  width: 100%;
+  width: 265px;
   border: none;
   outline: none;
 }
@@ -102,5 +120,5 @@ main {
   text-align: center;
 }
 .input {
-  width: 100%;
+  word-break: break-all;
 }
