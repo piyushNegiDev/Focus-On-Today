@@ -1,7 +1,6 @@
 let inputs = document.getElementsByTagName("input");
-let goals = 4;
 
-function goalsHtml() {
+function goalsHtml(goals) {
   let html = "";
   for (let index = 0; index < goals; index++) {
     html += `
@@ -15,14 +14,14 @@ function goalsHtml() {
                 />
             </div>
         </div>
-        <button>SAVE</button>
+        <button class="saveBtn">SAVE</button>
     </div>
     `;
   }
   document.querySelector(".goals").innerHTML = html;
 }
 
-function inputsListener() {
+function inputsListener(goals) {
   let selectGoalsMsg = document.querySelector(".selectGoalsMsg");
   inputs = Array.from(inputs);
 
@@ -35,6 +34,19 @@ function inputsListener() {
           selectGoalsMsg.innerHTML = `${index + 1}/${goals} task filled`;
           selectGoalsMsg.style.color = "green";
         }
+      }
+    });
+  });
+
+  let saveBtnElem = document.querySelectorAll(".saveBtn");
+  saveBtnElem = Array.from(saveBtnElem);
+  saveBtnElem.forEach((saveBtn, index) => {
+    saveBtn.addEventListener("click", () => {
+      if (inputs[index].value.trim() !== "") {
+        inputs[index].parentElement.innerHTML = inputs[index].value;
+
+        selectGoalsMsg.innerHTML = `${index + 1}/${goals} task filled`;
+        selectGoalsMsg.style.color = "green";
       }
     });
   });
@@ -75,11 +87,14 @@ function tick() {
   });
 }
 
-// goalsHtml();
-// inputsListener();
-// tick();
-
 let generateBtnELem = document.querySelector(".generateBtn");
 generateBtnELem.addEventListener("click", () => {
-  console.log("hello");
+  let goalNoInput = document.querySelector(".goalsNo");
+  let goals = goalNoInput.value;
+
+  if (goals !== "") {
+    goalsHtml(goals);
+    inputsListener(goals);
+    tick();
+  }
 });
