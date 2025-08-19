@@ -55,11 +55,35 @@ main {
 .selectGoalsMsg {
   color: red;
 }
-.goals {
+.goalsNo {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.goalsNo::placeholder {
+  text-align: center;
+}
+.generateBtn {
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: green;
+  color: white;
+}
+.generateBtn:hover {
+  background-color: rgb(0, 160, 0);
+}
+.goals,
+.goalsNoDiv {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+.goalsNoDiv {
+  background-color: rgb(240, 232, 232);
+  padding: 20px;
+  border-radius: 10px;
 }
 .goalsChild {
   width: 100%;

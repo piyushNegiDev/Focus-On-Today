@@ -75,6 +75,11 @@ function tick() {
   });
 }
 
-goalsHtml();
-inputsListener();
-tick();
+// goalsHtml();
+// inputsListener();
+// tick();
+
+let generateBtnELem = document.querySelector(".generateBtn");
+generateBtnELem.addEventListener("click", () => {
+  console.log("hello");
+});
