@@ -1,4 +1,5 @@
-let inputs = document.getElementsByTagName("input");
+let taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
+console.log(taskArray);
 
 function goalsHtml(goals) {
   let html = "";
@@ -15,6 +16,7 @@ function goalsHtml(goals) {
             </div>
         </div>
         <button class="saveBtn">SAVE</button>
+        <button class="deleteBtn">DELETE</button>
     </div>
     `;
   }
@@ -23,13 +25,25 @@ function goalsHtml(goals) {
 
 function inputsListener(goals) {
   let selectGoalsMsg = document.querySelector(".selectGoalsMsg");
+  let inputs = document.getElementsByTagName("input");
   inputs = Array.from(inputs);
 
   inputs.forEach((input, index) => {
+    if (taskArray.length !== 0) {
+      console.log("entering");
+
+      input.parentElement.innerHTML = goals[index];
+
+      selectGoalsMsg.innerHTML = `${index + 1}/${goals.length} task filled`;
+      selectGoalsMsg.style.color = "green";
+    }
+
     input.addEventListener("keydown", (event) => {
       if (input.value.trim() !== "") {
         if (event.key === "Enter") {
           input.parentElement.innerHTML = input.value;
+          taskArray.push(input.value);
+          saveToLocalStorage();
 
           selectGoalsMsg.innerHTML = `${index + 1}/${goals} task filled`;
           selectGoalsMsg.style.color = "green";
@@ -50,11 +64,31 @@ function inputsListener(goals) {
       }
     });
   });
+
+  let deleteBtnElem = document.querySelectorAll(".deleteBtn");
+  deleteBtnElem = Array.from(deleteBtnElem);
+  console.log(deleteBtnElem);
+
+  let goalsChild = document.querySelectorAll(".goalsChild");
+  console.log(goalsChild);
+
+  goalsChild = Array.from(goalsChild);
+
+  deleteBtnElem.forEach((deleteBtn, index) => {
+    deleteBtn.addEventListener("click", () => {
+      console.log("Entering");
+
+      goalsChild[index].remove();
+      console.log(taskArray.splice(index, 1));
+      taskArray.splice(index, 1);
+      saveToLocalStorage();
+    });
+  });
 }
 
-function tick() {
+function tick(goals) {
   let completedGoals = 0;
-  let totalGoals = inputs.length;
+  let totalGoals = goals.length;
   let bar = document.querySelector(".green-bar");
   let barWidth = 0;
   let circles = document.querySelectorAll(".circle");
@@ -93,8 +127,20 @@ generateBtnELem.addEventListener("click", () => {
   let goals = goalNoInput.value;
 
   if (goals !== "") {
+    console.log("Generating");
     goalsHtml(goals);
     inputsListener(goals);
-    tick();
+    tick(document.getElementsByTagName("input"));
   }
 });
+
+//Local Storage Logic
+if (taskArray.length !== 0) {
+  console.log("Calling from storage");
+  goalsHtml(taskArray.length);
+  inputsListener(taskArray);
+  tick(taskArray);
+}
+function saveToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(taskArray));
+}

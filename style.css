@@ -101,6 +101,9 @@ main {
   font-size: 1.2em;
   font-weight: bold;
 }
+.goalsChild .deleteBtn {
+  background-color: darkred;
+}
 .circle {
   width: 20px;
   height: 20px;
